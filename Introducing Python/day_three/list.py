@@ -16,4 +16,6 @@ name_list[0] = 'Changed'
 
 print(name_list, name_list_new_reference, new_list, new_new_list)
 
-# 
+# tuple
+empty_tuple = ()
+print(empty_tuple)
