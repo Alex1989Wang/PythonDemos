@@ -1,0 +1,20 @@
+import os
+
+# generate bdata
+bdata = bytes(range(0, 255))
+print(len(bdata))
+
+# write binary data
+file_output_bin = open("binary_file", "wb")
+file_output_bin.write(bdata)
+file_output_bin.close()
+
+# open the binary file
+file_open_bin = open("binary_file", "rb")
+read_bin_data = file_open_bin.read()
+print(len(read_bin_data))
+file_open_bin.close()
+
+print(os.SEEK_CUR)
+
+

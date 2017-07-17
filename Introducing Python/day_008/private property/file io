@@ -1,0 +1,24 @@
+content = "whatever nonsense this is; it's used as test."
+file_ouput = open("text_content", "wt")
+file_ouput.write(content)
+file_ouput.close()
+
+# try open a file without overwriting it
+try:
+    file_input = open("text_content", "xt")
+    print("no such file exists; ok to write")
+    file_input.write("hahahahhah")
+except FileExistsError:
+    print("file exists; stop writing.")
+
+# reading the content back into a string
+file_read = open("text_content", "rt")
+original_text = ""
+read_chunck = 100
+while True:
+    fragment = file_read.read(read_chunck)
+    if not fragment:
+        break;
+    original_text += fragment
+file_read.close()
+print(original_text)
