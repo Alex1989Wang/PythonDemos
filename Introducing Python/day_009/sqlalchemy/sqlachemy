@@ -1,0 +1,17 @@
+import sqlalchemy as sa
+
+db_conn = sa.create_engine("sqlite:///test_db")
+db_conn.execute("""CREATE TABLE IF NOT EXISTS zoo
+(name VARCHAR(20) PRIMARY KEY, 
+age INTEGER NOT NULL, 
+price FLOAT)""")
+
+# in_sql = "INSERT INTO zoo (name, age, price) VALUES (?, ?, ?)"
+# db_conn.execute(in_sql, "duck", 12, 34.43)
+# db_conn.execute(in_sql, "chick", 10, 21.43)
+
+select_sql = "SELECT * FROM zoo WHERE age = ?"
+rows = db_conn.execute(select_sql, 10)
+for row in rows:
+    print(row)
+
