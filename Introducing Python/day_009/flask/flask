@@ -1,0 +1,19 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__, static_folder=".", static_url_path="")
+
+# home directory
+@app.route("/")
+def home():
+    """Return the index.html file"""
+    return app.send_static_file("index.html")
+    # return "My home page"
+
+@app.route("/echo/")
+def echo():
+    kargs = {}
+    kargs["thing"] = request.args.get("thing")
+    kargs["place"] = request.args.get("place")
+    return render_template("flask2.html", **kargs)
+
+app.run(port=9999, debug=True)
