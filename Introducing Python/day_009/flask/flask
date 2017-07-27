@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, abort
 
 app = Flask(__name__, static_folder=".", static_url_path="")
 
@@ -16,4 +16,24 @@ def echo():
     kargs["place"] = request.args.get("place")
     return render_template("flask2.html", **kargs)
 
-app.run(port=9999, debug=True)
+@app.route("/user/<name>")
+def greet_name(name):
+    if name != "jiang":
+        abort(404)
+    return "<h1>Hello, {}<h1>".format(name)
+
+@app.route("/get_browser/")
+def print_browser():
+    user_agent = request.headers.get("User-Agent")
+    return "<h1>Your browser is {}<h1>".format(user_agent)
+
+@app.route("/header/")
+def print_header():
+    return "<body>{}<body>".format(request.headers)
+
+@app.route("/redirect/")
+def handle_redirect():
+    return redirect("https://www.google.com")
+
+if __name__ == "__main__":
+    app.run(port=9999, debug=True)
